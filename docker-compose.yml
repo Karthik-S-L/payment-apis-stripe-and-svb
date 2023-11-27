@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  paymentservices:
+    image: paymentservices
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+    
+      - YML_PAYMENT_GATEWAY_STRIPE_SECRET_KEY=your-secret-key-withoutquotes
+      - YML_PAYMENT_GATEWAY_HOST=http://localhost:3000
+      - YML_PAYMENT_GATEWAY_SUCCESS_URL=https://www.google.com
+      - YML_PAYMENT_GATEWAY_CANCEL_URL= https://www.google.com
+      - YML_PAYMENT_GATEWAY_SVB_AUTHENTICATION_URL=https://uat.api.svb.com/v1/security/oauth/token
+      - YML_PAYMENT_GATEWAY_SVB_CLIENT_ID=zaGwxNDijWPe9vtiVhB7I24v88JMuq3H
+      - YML_PAYMENT_GATEWAY_SVB_CLIENT_SECRET=ajSdcytZpZinmFtr
+      - YML_PAYMENT_GATEWAY_PAYMENT_SERVICE_PROVIDER=[STRIPE,SVB]
+      - YML_PAYMENT_GATEWAY_SVB_TRANSFER_URL=https://uat.api.svb.com/v2/transfer/domestic-verified-achs
+      - YML_PAYMENT_GATEWAY_SVB_BASE_API_URL=https://uat.api.svb.com/v2/transfer/domestic-achs
+      - YML_PAYMENT_GATEWAY_GET_ALL_TRANSACTIONS_PREFERENCE=RETURN_REPRESENTATION
